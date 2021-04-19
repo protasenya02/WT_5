@@ -75,8 +75,11 @@ function outputAuthors() {
         // вывод каждой строки из таблицы
         while($row = $result->fetch_assoc()) {
 
+            // преобразование числа в ip адрес
+            $ip_adress = long2ip($row["ip_registration"]);
+
             echo "<tr><td>" . $row["id"] . "</td><td>" . $row["name"] . "</td><td>" . $row["password"] . "</td><td>"
-                . $row["ip_registration"] . "</td><td>" . $row["data_registration"] . "</td></tr>";
+                .$ip_adress . "</td><td>" . $row["data_registration"] . "</td></tr>";
 
         }
         echo "</table>";
