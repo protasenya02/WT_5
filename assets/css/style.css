@@ -1,0 +1,46 @@
+body{
+    font-family: 'Open Sans', sans-serif;
+    background: #fff;
+    color: #4e525d;
+    cursor: default;
+    height: 100%;
+    width: 100%;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.table_inner{
+    margin: 70px auto;
+}
+
+table{
+     text-decoration: none;
+     border-collapse:collapse;
+     width: 80%;
+     text-align:center;
+     margin: 40px auto;
+ }
+
+th{
+    font-weight:normal;
+    font-size:16px;
+    color:#4e525d;
+    background-color:#dcebf5;
+}
+
+td{
+    font-size:14px;
+    color:#354251;
+}
+
+td,th{
+    white-space:pre-wrap;
+    padding:12px 0px;
+    line-height:14px;
+    vertical-align: middle;
+    border: 1px solid #dcebf5;
+}

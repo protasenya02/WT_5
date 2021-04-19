@@ -1,41 +1,26 @@
-<?php
+<?php require_once("general.php"); ?>
 
-require_once("constants.php");
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <meta charset = "utf-8">
+    <link rel = "stylesheet" href = "./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Авторы и статьи</title>
+</head>
+<body>
 
-// подключение к базе данных
-$mysqli = @new mysqli(HOST, USER, PASS, DB);
-// проверка соединения
-if ($mysqli->connect_errno) {
-    printf("Connection failed: %s\n", $mysqli->connect_error);
-    exit();
-}
-// установка кодировки
-$mysqli->set_charset('utf8');
-
-// текс SQL запроса
-$query = "SELECT * FROM authors";
-
-// запрос к БД
-$result = $mysqli->query($query);
-
-
-if ($result->num_rows > 0) {
-
-    echo "<table><tr><th>id</th><th>Имя автора</th><th>Пароль</th><th>ip при регистрации</th><th>Дата регистрации</th></tr>";
-
-    // вывод каждой строки из таблицы
-    while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["id"]."</td><td>".$row["name"]."</td><td>".$row["password"]."</td><td>"
-            .$row["ip_registration"]."</td><td>".$row["data_registration"]."</td></tr>";
-    }
-
-    echo "</table>";
-
-} else {
-    echo "0 results";
-}
-
-// закрытие соединения
-$mysqli->close();
-
-
+<!------------------------------------------------------->
+<section class="tables">
+    <div class="container">
+        <div class="table_inner">
+            <?php outputAuthorsArticles();
+            outputAuthors();
+            outputArticles();
+            ?>
+        </div>
+    </div>
+</section>
+</body>
+</html>
