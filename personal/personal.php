@@ -30,25 +30,37 @@ function connectBD($query) {
 // игра города
 function citiesGame() {
 
-    // получение последней буквы введенного слова
-    $last_letter = getLastLetter();
+    if (isset($_POST['send'])) {
+        // получение ответа пользователя
+        $user_input = getUserInput();
+        // получение последней буквы введенного слова
+        $last_letter = getLastLetter($user_input);
 
-    // текст запроса к БД
-    $query = "SELECT * FROM cities WHERE city_name LIKE '$last_letter%' AND was_named ='0' ";
+        // текст запроса к БД
+        $query = "SELECT * FROM cities WHERE city_name LIKE '$last_letter%' AND was_named ='0' ";
 
-    // запрос к БД
-    $data = connectBD($query);
+        // запрос к БД
+        $data = connectBD($query);
 
-    if (empty($data)) {
-        echo "<p class='city_title'>В БД нет такого города.<br>Вы выйграли!</p>";
-    } else {
+        if (empty($data)) {
+            echo "<p class='city_title'>В БД не осталось городов.<br>Вы выйграли!</p>";
+        } else {
 
-        echo "<p class='city_title'>".$data["city_name"]."</p>";
-        $id = $data["id"];
-        updateCity($id);
+            echo "<p class='city_title'>" . $data["city_name"] . "</p>";
+            $id = $data["id"];
+            updateCityById($id);
+        }
+        updateCityByName($user_input);
     }
 
+    if (isset($_POST['reset'])) {
+        resetCitiesInBD();
+    }
+}
 
+function updateCityByName($name) {
+    $update = "UPDATE cities SET was_named = '1' WHERE name = $name";
+    connectBD($update);
 }
 
 // получение введенного пользователем города
@@ -56,9 +68,9 @@ function getUserInput() {
 
     $user_input="";
 
-    if (isset($_POST['send'])) {
+//    if (isset($_POST['send'])) {
         $user_input =  htmlspecialchars($_POST['city']);
-    }
+//    }
     // удаление лишних пробелов
     $user_input = str_replace(" ", '', $user_input);
     $user_input = mb_convert_case($user_input, MB_CASE_TITLE, "UTF-8");
@@ -67,9 +79,7 @@ function getUserInput() {
 }
 
 // получение последней буквы города
-function getLastLetter() {
-
-    $user_input = getUserInput();
+function getLastLetter($user_input) {
 
     $last_letter  = mb_substr($user_input, -1);
     $last_letter = mb_strtoupper($last_letter);
@@ -77,7 +87,7 @@ function getLastLetter() {
     return $last_letter;
 }
 
-function updateCity($id) {
+function updateCityById($id) {
     $update = "UPDATE cities SET was_named = '1' WHERE id = $id";
     connectBD($update);
 }

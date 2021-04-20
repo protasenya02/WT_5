@@ -12,20 +12,19 @@
 <body>
 
 <!------------------------------------------------------->
-<section class="product_form">
+<section class="product_form" action="personal.php">
     <div class="container">
         <form class="input_form" method="POST">
             <div class="form_inner">
                 <div class="form_title">Игра города</div>
-                <input type="text" pattern="[А-Яа-яЁё ]+$" name="city" placeholder="Введите название города" required>
-                <input type="submit" name="send" value="Ответить">
+                <input type="text" pattern="[А-Яа-яЁё ]+$" name="city" placeholder="Введите название города"
+                       value="<?php if (isset($_POST['city'])) Echo $_POST['city']; ?>" required>
+                <div class="buttons">
+                    <input type="submit" name="send" value="Ответить">
+                    <input type="submit" name="reset" value="Заново">
+                </div>
             </div>
-
-            <?php
-               citiesGame();
-
-              // resetCitiesInBD();
-            ?>
+            <?php citiesGame(); ?>
         </form>
     </div>
 </section>

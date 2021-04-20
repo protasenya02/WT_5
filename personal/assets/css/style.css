@@ -75,14 +75,14 @@ ul li {
     padding-bottom: 20px;
 }
 
-.form_inner input, .form_inner textarea {
+.form_inner input {
     display: block;
     width: 100%;
     background: #f7f7f7;
     border-radius: 30px;
     border: 1px solid #f7f7f7;
 
-    padding-left: 5px;
+    padding-left: 15px;
     outline: none;
     margin: 30px 0;
     line-height: 44px;
@@ -102,6 +102,7 @@ ul li {
     color: #fff;
     font-size: 22px;
     transition-duration: 0.4s;
+    padding: 0;
 }
 
 .form_inner textarea {
@@ -125,4 +126,9 @@ input:valid, textarea:valid {
 .city_title {
     font-size: 30px;
     text-align: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
 }
